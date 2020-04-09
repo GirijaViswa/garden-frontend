@@ -20,6 +20,7 @@ const handleSubmit = (e,props) => {
 
 
 const SignUp = (props) => (
+    <div className="Container">
     <div className="SignUpForm">
         
         <form onSubmit={(e)=>handleSubmit(e,props)}>
@@ -32,7 +33,7 @@ const SignUp = (props) => (
             <hr></hr>
             <h4><a onClick={()=>props.history.push('/')}>Continue as Guest</a></h4>
         </form><br/>
-    </div>
+    </div></div>
 );
 
 const mapStatetoProps = (state) =>{

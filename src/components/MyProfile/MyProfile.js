@@ -30,8 +30,7 @@ class MyProfile extends React.Component {
         image: e.target.image.value,
         video_id: work.id
       };
-      e.target.information.value = '';
-      e.target.image.value = ''
+      
       var headers = {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -88,7 +87,8 @@ class MyProfile extends React.Component {
                     </form>
                   </div></Collapsible><br />
                   
-                  
+                  {this.props.user.activity.works.length > 0 ? 
+                  <div>
                   {this.props.user.activity.works.map(work => {
                     return (
                       work.video_id === video.id ? (
@@ -109,9 +109,10 @@ class MyProfile extends React.Component {
                           </div></Collapsible>  <br/>    
                         </div>
                       )
-                      :<h5>There are no notes to show up.</h5>
+                      :null
                       );
-                  })}
+                  })}</div>
+                  : <h5>There are no notes to show up.</h5>}
             </div>
               )
             })}</div>

@@ -2,7 +2,7 @@ import React from 'react'
 import './Login.css';
 import {connect} from 'react-redux';
 import {BrowserRouter as Router,Route,Link,Switch} from 'react-router-dom';
-import SignUp from '../SignUp/SignUp';
+
 
 const handleSubmit = (e,props) => {
     e.preventDefault();
@@ -24,17 +24,31 @@ const handleSubmit = (e,props) => {
         }
         else
         {
-            props.history.push('/signup')
+            if (user.status == "not ok")
+            {
+                alert(user.msg)
+                props.history.push('/login')
+            }
+            else if(user.status == "invalid email")
+            {
+                alert(user.msg)
+                props.history.push('/signup')
+            }
+            else
+            {
+                props.history.push('/signup')
+            }
         }
     })
 }
 
 const Login = (props) => (
+    <div className="Container">
     <div className="LoginForm">
         <Router>
         <form onSubmit={(e)=>handleSubmit(e,props)}>
             <h2>Login</h2>
-            <input type="text" name="Email" placeholder="Email" /><br/><br/>
+            <input type="email" name="Email" placeholder="Email" /><br/><br/>
             <input type="password" name="Password" placeholder="Password"/><br/><br/>
             <input type="submit" value="Login" className="LoginSubmit"/><br/>
             <h4><a onClick={()=>props.history.push('/signup')}>Register as New User</a></h4>
@@ -43,7 +57,7 @@ const Login = (props) => (
             
         </form>
         <br/><br/><br/><br/></Router>
-    </div>
+    </div></div>
 );
 
 const mapStatetoProps = (state) => {
